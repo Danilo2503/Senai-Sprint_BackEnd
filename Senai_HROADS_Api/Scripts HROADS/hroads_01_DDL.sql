@@ -1,41 +1,60 @@
-CREATE DATABASE Senai_HROADS_Manha;
+CREATE DATABASE SENAI_HROADS_MANHA; 
+USE SENAI_HROADS_MANHA;
 
-USE Senai_HROADS_Manha;
-
-CREATE TABLE TipoHabilidade
+CREATE TABLE TiposUsuarios
 (
-	IdTipoHabilidade		INT PRIMARY KEY IDENTITY
-	,TipoHabilidade			VARCHAR(200) NOT NULL
+
+	idTipoUsuario INT PRIMARY KEY IDENTITY
+	,Titulo VARCHAR(50) NOT NULL UNIQUE
+
 );
 
-CREATE TABLE Habilidade
+CREATE TABLE Usuarios
 (
-	IdHabilidade			INT PRIMARY KEY IDENTITY
-	,NomeHabilidade			VARCHAR(200) NOT NULL
-	,IdTipoHabilidade		INT FOREIGN KEY REFERENCES TipoHabilidade (IdTipoHabilidade)
+
+	IdUsuario INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(250) NOT NULL
+	,Email VARCHAR(250) UNIQUE NOT NULL
+	,Senha VARCHAR(250) NOT NULL
+	,idTipoUsuario INT FOREIGN KEY REFERENCES TiposUsuarios(idTipoUsuario) NOT NULL
+
 );
 
-CREATE TABLE Classe
+CREATE TABLE Classes
 (
-	IdClasse				INT PRIMARY KEY IDENTITY
-	,IdHabilidade			INT FOREIGN KEY REFERENCES Habilidade (IdHabilidade)
-	,NomeClasse				VARCHAR(200) NOT NULL
+	IdClasse INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE ClasseHabilidade
+CREATE TABLE Personagens
 (
-	 IdClasseHabilidade		INT PRIMARY KEY IDENTITY
-	,IdHabilidade			INT FOREIGN KEY REFERENCES Habilidade (IdHabilidade)
-	,IdClasse				INT FOREIGN KEY REFERENCES Classe (IdClasse)
+	IdPersonagem INT PRIMARY KEY IDENTITY
+	,IdClasse INT FOREIGN KEY REFERENCES Classes(IdClasse) NOT NULL
+	,Nome VARCHAR(200)NOT NULL
+	,CapacidadeVida INT NOT NULL
+	,CapacidadeMana INT NOT NULL
+	,DataAtualizacao DATE NOT NULL
+	,DataCriacao DATE NOT NULL
 );
 
-CREATE TABLE Personagem
+CREATE TABLE TiposDeHabilidades
 (
-	IdPersonagem			INT PRIMARY KEY IDENTITY
-	,NomePersonagem			VARCHAR(200) NOT NULL
-	,IdClasse				INT FOREIGN KEY REFERENCES Classe (IdClasse)
-	,VidaMáxima				VARCHAR(100) NOT NULL
-	,ManaMáxima				VARCHAR(80) NOT NULL
-	,DataAtualizacao		DATE
-	,DataCriacao			DATE
+	IdTipoHabilidade INT PRIMARY KEY IDENTITY 
+	,Nome VARCHAR(200)
 );
+
+
+
+CREATE TABLE Habilidades
+(
+	IdHabilidade INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(200) NOT NULL
+	,IdTipoHabilidade INT FOREIGN KEY REFERENCES TiposDeHabilidades(IdTipoHabilidade)
+);
+
+CREATE TABLE Classes_Habilidades
+(
+	IdClasse INT FOREIGN KEY REFERENCES Classes(IdClasse)
+	,IdHabilidade INT FOREIGN KEY REFERENCES Habilidades(IdHabilidade)
+);
+

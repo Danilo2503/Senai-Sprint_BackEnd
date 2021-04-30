@@ -1,49 +1,26 @@
-USE Senai_HROADS_Manha;
+USE SENAI_HROADS_MANHA;
 
---Exercício 10
-SELECT COUNT (IdHabilidade) AS [Quant. de Habilidades]
-FROM Habilidade;
+--Selecionar todos os tipos de usuários e mostrar na tela
+SELECT Titulo FROM TiposUsuarios;
 
---Exercício 11
-SELECT IdHabilidade
-FROM Habilidade
-ORDER BY IdHabilidade ASC;
+--Selecionar todos os usuários criados no sistema junto com seu nivel de permissão
+SELECT U.Nome, U.Email , TU.Titulo FROM Usuarios U
+INNER JOIN TiposUsuarios TU
+ON U.idTipoUsuario = TU.idTipoUsuario;
 
---Exercício 12
-SELECT * FROM TipoHabilidade;
+--Selecionar todas as habilidades e seus tipos cadastrados e mostrar para o usuário
+SELECT H.Nome, TH.Nome AS Tipo FROM Habilidades H
+INNER JOIN TiposDeHabilidades TH
+ON H.IdTipoHabilidade = TH.IdTipoHabilidade;
 
---Exercício 13
-SELECT Habilidade.NomeHabilidade As Habilidade, TipoHabilidade.TipoHabilidade AS Genero FROM Habilidade
-LEFT JOIN TipoHabilidade
-ON Habilidade.IdTipoHabilidade = TipoHabilidade.IdTipoHabilidade;
+--Selecionar todas as classes de personagens  existentes
+SELECT C.Nome FROM Classes C;
 
---Exercício 14
-SELECT Personagem.NomePersonagem AS Personagem, Classe.NomeClasse AS Classe FROM Personagem
-LEFT JOIN Classe
-ON Personagem.IdClasse = Classe.IdClasse;
 
---Exercício 15
-SELECT Personagem.NomePersonagem AS Personagem , Classe.NomeClasse AS Classe FROM Personagem
-RIGHT JOIN Classe
-ON Personagem.IdClasse = Classe.IdClasse;
+--Selecionar todos os personagens e suas habilidades
+SELECT P.Nome, C.Nome AS Classe FROM Personagens P
+INNER JOIN Classes C
+ON P.IdClasse = C.IdClasse;
 
---Exercício 16
-SELECT Classe.NomeClasse AS Classe, Habilidade.NomeHabilidade AS Habilidades FROM ClasseHabilidade
-INNER JOIN Habilidade
-ON Habilidade.IdHabilidade = ClasseHabilidade.IdHabilidade
-INNER JOIN Classe
-ON Classe.IdClasse = ClasseHabilidade.IdClasse;
-
---Exercício 17
-SELECT Habilidade.NomeHabilidade AS Habilidade, Classe.NomeClasse AS Classe FROM ClasseHabilidade
-INNER JOIN Habilidade
-ON Habilidade.IdHabilidade = ClasseHabilidade.IdHabilidade
-INNER JOIN Classe
-ON Classe.IdClasse = ClasseHabilidade.IdClasse;
-
---Exercício 18
-SELECT Habilidade.NomeHabilidade AS Habilidade, Classe.NomeClasse AS Classe FROM ClasseHabilidade
-LEFT JOIN Habilidade
-ON Habilidade.IdHabilidade = ClasseHabilidade.IdHabilidade
-LEFT JOIN Classe
-ON Classe.IdClasse = ClasseHabilidade.IdClasse;
+--Personagens e seus dados
+SELECT P.Nome, P.CapacidadeVida AS Vida, P.CapacidadeMana AS Mana, P.DataCriacao AS Criação FROM Personagens P;

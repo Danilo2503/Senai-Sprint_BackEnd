@@ -1,61 +1,25 @@
-USE Senai_HROADS_Manha;
+USE SENAI_HROADS_MANHA;
 
-INSERT INTO TipoHabilidade (TipoHabilidade)
-VALUES					   ('Ataque')
-						  ,('Defesa')
-						  ,('Cura')
-						  ,('Magia');
+INSERT INTO Classes(Nome)
+VALUES ('Bárbaro'),('Cruzado'),('Caçadora de Demônios'),('Monge'),('Necromante'),('Feitiçeiro'),('Arcanista');
 
-INSERT INTO Habilidade (NomeHabilidade, IdTipoHabilidade)
-VALUES				   ('Lança Mortal', 1)
-					  ,('Escudo Supremo', 2)
-					  ,('Recuperar Vida', 3);
+INSERT INTO Personagens(IdClasse,Nome,CapacidadeVida,CapacidadeMana,DataAtualizacao,DataCriacao)
+VALUES (1,'DeuBug',100,80,'2021-03-01','2019-01-18')
+	  ,(4,'BitBug',70,100,'2021-03-01','2016-03-17')
+	  ,(7,'Fer8',75,60,'2021-03-01','2018-03-18');
 
-INSERT INTO Classe (NomeClasse)
-VALUES			   ('Bárbaro')
-				  ,('Cruzado')
-				  ,('Caçadora de Demônios')
-				  ,('Monge')
-				  ,('Necromante')
-				  ,('Feiticeiro')
-				  ,('Arcanista');
+INSERT INTO TiposDeHabilidades(Nome)
+VALUES ('Ataque'),('Defesa'),('Cura'),('Magia');
 
-INSERT INTO Personagem (NomePersonagem, IdClasse, VidaMáxima, ManaMáxima, DataAtualizacao, DataCriacao)
-VALUES				   ('DeuBug' , 1 , 100 , 80 , '03/03/2021', '18/01/2019')
-					  ,('BitBug' , 4 , 70 , 100 , '03/03/2021', '17/03/2016')
-					  ,('Fer8' , 7 , 75 , 60 , '03/03/2021' , '19/03/2018');
+INSERT INTO Habilidades(IdTipoHabilidade,Nome)
+VALUES (1,'Lança Mortal'),(2,'Escudo Supremo'),(3,'Recuperar Vida'),(4,'');
 
-INSERT INTO ClasseHabilidade (IdClasse, IdHabilidade)
-VALUES						 (1, 1)
-							,(1, 2)
-							,(2, 2)
-							,(3, 1)
-							,(4, 3)
-							,(4, 2)
-							,(5, null)
-							,(6, 3)
-							,(7, null);
+INSERT INTO Classes_Habilidades(IdClasse,IdHabilidade)
+VALUES (1,1),(1,2),(2,2),(3,1),(4,2),(4,3),(6,3);
 
---Exercício 4
-UPDATE Personagem
-SET NomePersonagem = 'Fer7'
-WHERE IdPersonagem = 3;
+INSERT INTO TiposUsuarios(Titulo)
+VALUES ('Administrador'),('Jogador');
 
---Exercício 5
-UPDATE Classe
-SET NomeClasse = 'Necromancer'
-WHERE IdClasse = 5;
-
---Exercício 6
-SELECT * FROM Personagem
-
---Exercício 7
-SELECT * FROM Classe
-
---Exercício 8
-SELECT NomeClasse FROM Classe;
-
---Exercício 9
-SELECT * FROM Habilidade;
-
+INSERT INTO Usuarios(Nome,Email,Senha,idTipoUsuario)
+VALUES ('Danilo','danilo@email.com','senai132',1),('Enzzo','enzzo@email.com','132senai',2);
 
